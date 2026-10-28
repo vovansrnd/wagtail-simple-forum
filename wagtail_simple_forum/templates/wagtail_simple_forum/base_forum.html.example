@@ -1,0 +1,30 @@
+{# ==========================================================================
+   HOW TO OVERRIDE THIS TEMPLATE FROM YOUR PROJECT
+   ==========================================================================
+
+   This file is NOT loaded by Django (note the ".example" suffix — the
+   template loader only matches the exact path "wagtail_simple_forum/
+   base_forum.html", so this file is inert). It exists purely as
+   documentation, sitting right next to the real template it describes,
+   so anyone who opens this folder discovers the override mechanism
+   immediately — instead of having to remember it or find it in a README.
+
+   Django's template loader searches your project's own template
+   directories (settings.TEMPLATES[...]["DIRS"], plus each app's
+   "templates/" folder if APP_DIRS=True) BEFORE it searches installed
+   apps' own "templates/" folders, in the order apps are listed in
+   INSTALLED_APPS. wagtail_simple_forum ships its own base_forum.html,
+   but if your project also has a file at:
+
+       <your_project>/templates/wagtail_simple_forum/base_forum.html
+
+   ...your project's copy wins automatically. No settings, no extra
+   configuration — just place a file at that exact path and edit it
+   freely. The same mechanism works for ANY template shipped by this
+   plugin (index.html, topic.html, section.html, etc.) — just mirror
+   the same relative path under your project's templates directory.
+
+   Quick start: copy the real base_forum.html from this same folder,
+   drop it into your project's templates/wagtail_simple_forum/ folder,
+   and change whatever you like (base layout, extra <head> tags, etc).
+   ========================================================================== #}

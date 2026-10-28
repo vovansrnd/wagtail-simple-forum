@@ -1,0 +1,856 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-25 02:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: wagtail_simple_forum/apps.py:9
+msgid "Wagtail Simple Forum"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:34
+msgid "Your website"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:47 wagtail_simple_forum/forms.py:98
+msgid "Check: how much is...?"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:50
+msgid "Your name"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:51
+msgid "Email"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:88 wagtail_simple_forum/forms.py:95
+#, python-format
+msgid "Check: how much is %(a)s + %(b)s?"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:100
+msgid "Your name *"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:102
+msgid "Email (private) *"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:104
+msgid "Answer"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:109
+msgid "Spam detected."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:116
+msgid "Security verification token missing."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:124
+msgid "Form session expired. Please refresh the page."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:129
+msgid "Security verification failed."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:138
+msgid "You submitted the form suspiciously fast."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:159
+msgid "Invalid verification code."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:166
+msgid "Verification signature mismatch."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:172
+msgid "Incorrect answer to the verification question."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:180
+msgid "Topic title"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:184
+msgid "First message"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:190
+msgid "Title is too short."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:197 wagtail_simple_forum/forms.py:217
+#, python-format
+msgid "Message is too long (limit: %(limit)s characters)."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:202 wagtail_simple_forum/forms.py:237
+#: wagtail_simple_forum/forms.py:295 wagtail_simple_forum/forms.py:312
+msgid "Message is too short."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:210 wagtail_simple_forum/forms.py:303
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:66
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:108
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:164
+msgid "Reply"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:222
+msgid "Reply is too short."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:234 wagtail_simple_forum/forms.py:292
+#: wagtail_simple_forum/forms.py:309
+msgid "Message is too long."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:242
+msgid "To"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:243 wagtail_simple_forum/models.py:360
+msgid "Subject"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:247 wagtail_simple_forum/models.py:419
+msgid "Message"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:254
+msgid "Username"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:256
+msgid "Message subject"
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:262
+msgid "Please specify a recipient."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:268
+msgid "Recipient not found or unavailable."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:271
+msgid "Recipient account is deactivated."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:278
+msgid "You cannot send a message to yourself."
+msgstr ""
+
+#: wagtail_simple_forum/forms.py:286
+msgid "Subject is too short."
+msgstr ""
+
+#: wagtail_simple_forum/models.py:69
+msgid "Anonymous"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:139 wagtail_simple_forum/models.py:329
+msgid "Admin"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:140 wagtail_simple_forum/models.py:330
+msgid "Moderator"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:141
+msgid "Member"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:142
+msgid "Guest"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:147 wagtail_simple_forum/models.py:167
+msgid "Title"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:148 wagtail_simple_forum/models.py:172
+msgid "Order"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:153
+msgid "Forum Category"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:154
+msgid "Forum Categories"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:165
+msgid "Category"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:169 wagtail_simple_forum/models.py:205
+msgid "Slug"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:171
+msgid "Description"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:177
+msgid "Forum Section"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:178
+msgid "Forum Sections"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:189
+msgid "Section"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:197 wagtail_simple_forum/models.py:275
+msgid "Author (User)"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:200 wagtail_simple_forum/models.py:278
+#: wagtail_simple_forum/models.py:414
+msgid "Author name"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:202 wagtail_simple_forum/models.py:280
+msgid "Author Email"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:203
+msgid "Topic Title"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:209 wagtail_simple_forum/models.py:287
+msgid "Created at"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:211
+msgid "Views"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:212
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:45
+msgid "Pinned"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:213
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:47
+msgid "Closed"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:214 wagtail_simple_forum/models.py:299
+msgid "Approved"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:216
+msgid "Total posts"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:218
+msgid "Last post at"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:226
+msgid "Last post by"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:232
+msgid "Forum Topic"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:233
+msgid "Forum Topics"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:267
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:29
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:29
+msgid "Topic"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:284
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:40
+msgid "Message text"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:289
+msgid "Updated at"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:290
+msgid "Edited at"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:297
+msgid "Edited by"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:300
+msgid "Deleted"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:305
+msgid "Forum Post"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:306
+msgid "Forum Posts"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:331 wagtail_simple_forum/models.py:356
+msgid "User"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:347
+msgid "Legacy user map"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:348
+msgid "Legacy user maps"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:367
+msgid "Sender"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:375
+msgid "Recipient"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:384
+msgid "Private Message Thread"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:385
+msgid "Private Message Threads"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:403
+msgid "Thread"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:411
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:30
+msgid "Author"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:427
+msgid "Private Message"
+msgstr ""
+
+#: wagtail_simple_forum/models.py:428
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:5
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:9
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:18
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:27
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:14
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:14
+msgid "Private Messages"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:21
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:28
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:5
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:5
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:5
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:10
+#: wagtail_simple_forum/wagtail_hooks.py:107
+msgid "Forum"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:25
+msgid "Breadcrumbs"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:37
+msgid "PM"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:46
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:47
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:9
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:25
+msgid "Search forum"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/base_forum.html:49
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:15
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:32
+msgid "Search"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/components/pagination.html:3
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:101
+msgid "Page navigation"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/components/pagination.html:6
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:103
+msgid "Previous page"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/components/pagination.html:11
+#, python-format
+msgid ""
+"\n"
+"            Page %(number)s of %(total)s\n"
+"        "
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/components/pagination.html:17
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:109
+msgid "Next page"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:16
+#, python-format
+msgid ""
+"\n"
+"                        %(counter)s section\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        %(counter)s sections\n"
+"                    "
+msgstr[0] ""
+msgstr[1] ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:38
+msgid "topics"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:43
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:37
+msgid "posts"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:50
+msgid "There are no sections in this category yet."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/index.html:58
+msgid "The forum is currently empty."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:23
+msgid "Compose"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:30
+msgid "Participant"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:33
+msgid "Messages"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:37
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:37
+msgid "Date"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:61
+msgid "You have no private messages yet."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html:62
+msgid "Write your first message"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:23
+msgid "New private message"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:16
+msgid "New message"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:51
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:85
+msgid "Back"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html:54
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:83
+msgid "Send"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:43
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:81
+msgid "Permalink"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:48
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:86
+msgid "Edited"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:49
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:87
+msgid "ed."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:59
+msgid "No messages yet."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html:80
+msgid "Back to list"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:25
+msgid "Edit post"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:18
+msgid "Editing"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:48
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:163
+msgid "Cancel"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html:52
+msgid "Save"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:7
+#, python-format
+msgid "Search: «%(q)s» — Forum"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:23
+#, python-format
+msgid "Search results for: «%(q)s»"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:29
+msgid "Enter search query..."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:29
+msgid "Search query"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:39
+msgid "Found topics:"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:58
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:57
+msgid "Last page"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:67
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:63
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:27
+msgid "pinned"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:68
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:64
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:30
+msgid "closed"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:80
+#, python-format
+msgid "Nothing found for «<strong>%(q)s</strong>»."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/search.html:86
+msgid "Please enter a search query."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:23
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:10
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:18
+msgid "New topic"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:27
+msgid "Topics list"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:33
+msgid "Replies"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:107
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:118
+msgid "There are no topics in this section yet."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/section.html:119
+msgid "Create the first topic"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:36
+msgid "views"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:45
+msgid "Open"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:47
+msgid "Close"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:55
+msgid "Unpin"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:57
+msgid "Pin"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:91
+msgid "Actions"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:92
+msgid "Edit"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:95
+msgid "Delete this post?"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:97
+msgid "Delete"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:117
+msgid "No posts yet."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:126
+msgid "Reply form"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:131
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:226
+msgid "Write a reply..."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:172
+#: wagtail_simple_forum/views.py:531
+msgid "This topic is closed for replies."
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic.html:208
+msgid "Reply to"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:25
+#, python-format
+msgid "New topic in section «%(section_title)s»"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html:89
+msgid "Create topic"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/widgets/latest_activity.html:5
+msgid "Latest forum posts"
+msgstr ""
+
+#: wagtail_simple_forum/templates/wagtail_simple_forum/widgets/latest_activity.html:21
+msgid "No messages on the forum yet."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:208
+msgid "Deleted user"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:248
+#, python-format
+msgid "[%(site)s] New forum topic: %(title)s"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:251
+#, python-format
+msgid ""
+"A new forum topic has been created.\n"
+"\n"
+"Topic: %(title)s\n"
+"Section: %(section)s\n"
+"Author: %(author)s\n"
+"Link: %(url)s\n"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:272
+#, python-format
+msgid "[%(site)s] New reply in topic: %(title)s"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:275
+#, python-format
+msgid ""
+"A new reply has been posted in the forum.\n"
+"\n"
+"Topic: %(title)s\n"
+"Section: %(section)s\n"
+"Author: %(author)s\n"
+"Link: %(url)s\n"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:308
+#, python-format
+msgid "New reply in your topic: %(title)s"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:310
+#, python-format
+msgid ""
+"A new reply has been posted in your topic.\n"
+"\n"
+"Topic: %(title)s\n"
+"Link: %(url)s\n"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:332
+#, python-format
+msgid "New private message: %(subject)s"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:334
+#, python-format
+msgid ""
+"You have received a new private message.\n"
+"\n"
+"Subject: %(subject)s\n"
+"From: %(author)s\n"
+"Link: %(url)s\n"
+msgstr ""
+
+#: wagtail_simple_forum/views.py:422
+msgid "You are creating topics too quickly. Please try again later."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:472
+msgid "Topic created."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:475
+msgid "Topic submitted for moderation."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:544
+msgid "You are posting replies too quickly. Please wait a moment."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:580
+msgid "Reply posted."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:585
+msgid "Reply submitted for moderation."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:622 wagtail_simple_forum/views.py:667
+#: wagtail_simple_forum/views.py:687 wagtail_simple_forum/views.py:701
+msgid "Access denied."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:647
+msgid "Post updated."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:674
+msgid "The first post cannot be deleted. Close or delete the topic instead."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:679
+msgid "Post deleted."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:692
+msgid "Topic closed."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:692
+msgid "Topic reopened."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:706
+msgid "Topic pinned."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:706
+msgid "Topic unpinned."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:719
+msgid "Search rate limit exceeded. Please wait a minute."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:824
+msgid "Private messaging rate limit reached. Please wait."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:846
+msgid "Private message sent."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:884
+msgid "You are sending messages too quickly."
+msgstr ""
+
+#: wagtail_simple_forum/views.py:910
+msgid "Message sent."
+msgstr ""
+
+#: wagtail_simple_forum/wagtail_hooks.py:18
+msgid "Categories"
+msgstr ""
+
+#: wagtail_simple_forum/wagtail_hooks.py:28
+msgid "Sections"
+msgstr ""
+
+#: wagtail_simple_forum/wagtail_hooks.py:39
+msgid "Topics"
+msgstr ""
+
+#: wagtail_simple_forum/wagtail_hooks.py:70
+msgid "Posts"
+msgstr ""
+
+#: wagtail_simple_forum/wagtail_hooks.py:97
+msgid "Legacy users"
+msgstr ""

@@ -1,0 +1,23 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/widgets/latest_activity.html #}
+{% load forum_tags i18n %}
+
+<div class="widget widget-forum">
+    <h3 class="widget-title">{% trans "Latest forum posts" %}</h3>
+    {% get_latest_forum_posts 5 as latest_posts %}
+
+    {% if latest_posts %}
+        <ul class="widget-list">
+            {% for post in latest_posts %}
+                <li class="widget-list-item">
+                    <a href="{% url 'wagtail_simple_forum:topic_view' slug=post.topic.slug %}#post-{{ post.id }}" class="widget-list-link">
+                        <strong>{{ post.topic.title }}</strong>
+                        <span class="widget-list-excerpt">{{ post.content|striptags|truncatechars:60 }}</span>
+                    </a>
+                    <span class="widget-list-meta">{{ post.display_author_name }} · {{ post.created_at|date:"d.m.Y" }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="widget-empty">{% trans "No messages on the forum yet." %}</p>
+    {% endif %}
+</div>

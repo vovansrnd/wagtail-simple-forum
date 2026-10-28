@@ -1,0 +1,61 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/index.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Forum" %}{% endblock %}
+
+{% block forum_content %}
+    {% for cat in categories %}
+        <section class="forum-category" aria-labelledby="cat-{{ forloop.counter }}">
+            <div class="forum-category__header">
+                <h2 class="forum-category__title" id="cat-{{ forloop.counter }}">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    {{ cat.title }}
+                </h2>
+                <span class="forum-category__meta">
+                    {% blocktrans count counter=cat.sections_count %}
+                        {{ counter }} section
+                    {% plural %}
+                        {{ counter }} sections
+                    {% endblocktrans %}
+                </span>
+            </div>
+            <ul class="forum-section-list">
+                {% for sec in cat.sections.all %}
+                    <li class="forum-section-item">
+                        <div class="forum-section-icon" aria-hidden="true">
+                            <i class="fa-regular fa-comments"></i>
+                        </div>
+                        <div class="forum-section-body">
+                            <a href="{% url 'wagtail_simple_forum:section_view' slug=sec.slug %}"
+                               class="forum-section-title">{{ sec.title }}</a>
+                            {% if sec.description %}<p class="forum-section-desc">{{ sec.description }}</p>{% endif %}
+                        </div>
+                        <div class="forum-section-stats">
+                            <span class="forum-stat">
+                                <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+                                <strong>{{ sec.topics_count }}</strong>
+                                <span class="forum-stat__label">{% trans "topics" %}</span>
+                            </span>
+                            <span class="forum-stat">
+                                <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                                <strong>{{ sec.posts_count }}</strong>
+                                <span class="forum-stat__label">{% trans "posts" %}</span>
+                            </span>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="forum-empty">
+                        <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                        {% trans "There are no sections in this category yet." %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% empty %}
+        <div class="forum-empty-state">
+            <i class="fa-regular fa-comments" aria-hidden="true"></i>
+            <p>{% trans "The forum is currently empty." %}</p>
+        </div>
+    {% endfor %}
+{% endblock forum_content %}

@@ -1,0 +1,123 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/section.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block title %}{{ section.title }} — {% trans "Forum" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span>{{ section.category.title }}</span>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{{ section.title }}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-section-page">
+        <div class="forum-section-page__header">
+            <div>
+                <h2 class="forum-section-page__title">{{ section.title }}</h2>
+                {% if section.description %}<p class="forum-section-page__desc">{{ section.description }}</p>{% endif %}
+            </div>
+            <a href="{% url 'wagtail_simple_forum:topic_create' slug=section.slug %}" class="forum-btn forum-btn--primary">
+                <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                {% trans "New topic" %}
+            </a>
+        </div>
+        {% if topics_page.object_list %}
+            <div class="forum-topic-table" role="table" aria-label="{% trans 'Topics list' %}">
+                <div class="forum-topic-row forum-topic-row--head" role="row">
+                    <div class="forum-topic-cell forum-topic-cell--title" role="columnheader">{% trans "Topic" %}</div>
+                    <div class="forum-topic-cell forum-topic-cell--author" role="columnheader">{% trans "Author" %}</div>
+                    <div class="forum-topic-cell forum-topic-cell--replies" role="columnheader">
+                        <i class="fa-regular fa-comment" aria-hidden="true"></i>
+                        <span class="sr-only">{% trans "Replies" %}</span>
+                    </div>
+                    <div class="forum-topic-cell forum-topic-cell--date" role="columnheader">
+                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                        <span class="sr-only">{% trans "Date" %}</span>
+                    </div>
+                </div>
+                {% for topic in topics_page %}
+                    <div class="forum-topic-row{% if topic.is_pinned %} forum-topic-row--pinned{% endif %}{% if topic.is_closed %} forum-topic-row--closed{% endif %}" role="row">
+                        <div class="forum-topic-cell forum-topic-cell--title" role="cell">
+                            <div class="forum-topic-icon" aria-hidden="true">
+                                {% if topic.is_pinned %}
+                                    <i class="fa-solid fa-thumbtack" title="{% trans 'Pinned' %}"></i>
+                                {% elif topic.is_closed %}
+                                    <i class="fa-solid fa-lock" title="{% trans 'Closed' %}"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-comment-dots"></i>
+                                {% endif %}
+                            </div>
+                            <div class="forum-topic-main">
+                                <div class="forum-topic-title-row">
+                                    <a href="{% url 'wagtail_simple_forum:topic_view' slug=topic.slug %}" class="forum-topic-link">{{ topic.title }}</a>
+                                    {% if topic.last_page > 1 %}
+                                        <a href="{% url 'wagtail_simple_forum:topic_view' slug=topic.slug %}?page={{ topic.last_page }}"
+                                           class="forum-topic-last-page" title="{% trans 'Last page' %}" aria-label="{% trans 'Last page' %}">
+                                            <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="forum-topic-badges">
+                                    {% if topic.is_pinned %}<span class="forum-badge forum-badge--pinned">{% trans "pinned" %}</span>{% endif %}
+                                    {% if topic.is_closed %}<span class="forum-badge forum-badge--closed">{% trans "closed" %}</span>{% endif %}
+                                </div>
+                                <div class="forum-topic-meta-mobile">
+                                    <span class="forum-topic-meta-item">
+                                        <i class="fa-regular fa-user" aria-hidden="true"></i> {{ topic.display_author_name }}
+                                    </span>
+                                    <span class="forum-topic-meta-item">
+                                        <i class="fa-regular fa-comment" aria-hidden="true"></i> {{ topic.replies_count|default:0 }}
+                                    </span>
+                                    <span class="forum-topic-meta-item">
+                                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                        {% if topic.last_post_at %}
+                                            <time datetime="{{ topic.last_post_at|date:'c' }}">{{ topic.last_post_at|date:"d.m.Y" }}</time>
+                                        {% else %}
+                                            <time datetime="{{ topic.created_at|date:'c' }}">{{ topic.created_at|date:"d.m.Y" }}</time>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--author" role="cell">
+                            <span class="forum-topic-author">{{ topic.display_author_name }}</span>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--replies" role="cell">
+                            <span class="forum-topic-replies">{{ topic.replies_count|default:0 }}</span>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--date" role="cell">
+                            {% if topic.last_post_at %}
+                                <time datetime="{{ topic.last_post_at|date:'c' }}" title="{{ topic.last_post_at|date:'d.m.Y H:i' }}">{{ topic.last_post_at|date:"d.m.Y" }}</time>
+                            {% else %}
+                                <time datetime="{{ topic.created_at|date:'c' }}" title="{{ topic.created_at|date:'d.m.Y H:i' }}">{{ topic.created_at|date:"d.m.Y" }}</time>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if topics_page.paginator.num_pages > 1 %}
+                <nav class="forum-pagination" aria-label="{% trans 'Page navigation' %}">
+                    {% if topics_page.has_previous %}
+                        <a href="?page={{ topics_page.previous_page_number }}" class="forum-pagination__btn" rel="prev" aria-label="{% trans 'Previous page' %}">
+                            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                    <span class="forum-pagination__info">{% blocktrans with number=topics_page.number total=topics_page.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}</span>
+                    {% if topics_page.has_next %}
+                        <a href="?page={{ topics_page.next_page_number }}" class="forum-pagination__btn" rel="next" aria-label="{% trans 'Next page' %}">
+                            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+        {% else %}
+            <div class="forum-empty-state">
+                <i class="fa-regular fa-comment-dots" aria-hidden="true"></i>
+                <p>{% trans "There are no topics in this section yet." %}</p>
+                <a href="{% url 'wagtail_simple_forum:topic_create' slug=section.slug %}" class="forum-btn forum-btn--primary">{% trans "Create the first topic" %}</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock forum_content %}

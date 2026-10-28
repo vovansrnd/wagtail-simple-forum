@@ -1,0 +1,21 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/components/pagination.html #}
+{% load i18n %}
+<nav class="forum-pagination" aria-label="{% trans "Page navigation" %}">
+    {% if page_obj.has_previous %}
+        <a href="?{{ query_string }}page={{ page_obj.previous_page_number }}"
+           class="forum-pagination__btn" rel="prev" aria-label="{% trans "Previous page" %}">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+    <span class="forum-pagination__info">
+        {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}
+            Page {{ number }} of {{ total }}
+        {% endblocktrans %}
+    </span>
+    {% if page_obj.has_next %}
+        <a href="?{{ query_string }}page={{ page_obj.next_page_number }}"
+           class="forum-pagination__btn" rel="next" aria-label="{% trans "Next page" %}">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+</nav>

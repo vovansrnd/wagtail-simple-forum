@@ -1,0 +1,66 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/pm_inbox.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Private Messages" %} — {% trans "Forum" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{% trans "Private Messages" %}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-section-page">
+        <div class="forum-section-page__header">
+            <div>
+                <h2 class="forum-section-page__title">
+                    <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                    {% trans "Private Messages" %}
+                </h2>
+            </div>
+            <a href="{% url 'wagtail_simple_forum:pm_new' %}" class="forum-btn forum-btn--primary">
+                <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                {% trans "Compose" %}
+            </a>
+        </div>
+        {% if threads %}
+            <div class="forum-topic-table" role="table" aria-label="{% trans 'Private Messages' %}">
+                <div class="forum-topic-row forum-topic-row--head" role="row">
+                    <div class="forum-topic-cell forum-topic-cell--title" role="columnheader">{% trans "Topic" %}</div>
+                    <div class="forum-topic-cell forum-topic-cell--author" role="columnheader">{% trans "Participant" %}</div>
+                    <div class="forum-topic-cell forum-topic-cell--replies" role="columnheader">
+                        <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                        <span class="sr-only">{% trans "Messages" %}</span>
+                    </div>
+                    <div class="forum-topic-cell forum-topic-cell--date" role="columnheader">
+                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                        <span class="sr-only">{% trans "Date" %}</span>
+                    </div>
+                </div>
+                {% for thread in threads %}
+                    <div class="forum-topic-row" role="row">
+                        <div class="forum-topic-cell forum-topic-cell--title" role="cell">
+                            <div class="forum-topic-icon" aria-hidden="true"><i class="fa-regular fa-envelope"></i></div>
+                            <a href="{% url 'wagtail_simple_forum:pm_thread' pk=thread.pk %}" class="forum-topic-link">{{ thread.subject }}</a>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--author" role="cell">
+                            <span class="forum-topic-author">{{ thread.other_user_display }}</span>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--replies" role="cell">
+                            <span class="forum-topic-replies">{{ thread.messages_count }}</span>
+                        </div>
+                        <div class="forum-topic-cell forum-topic-cell--date" role="cell">
+                            <time datetime="{{ thread.activity_at|date:'c' }}" title="{{ thread.activity_at|date:'d.m.Y H:i' }}">{{ thread.activity_at|date:"d.m.Y" }}</time>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="forum-empty-state">
+                <i class="fa-regular fa-envelope-open" aria-hidden="true"></i>
+                <p>{% trans "You have no private messages yet." %}</p>
+                <a href="{% url 'wagtail_simple_forum:pm_new' %}" class="forum-btn forum-btn--primary">{% trans "Write your first message" %}</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock forum_content %}

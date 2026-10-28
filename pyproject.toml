@@ -1,0 +1,27 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "wagtail-simple-forum"
+version = "0.1.0"
+description = "Lightweight, responsive forum with private messaging, anti-spam, and Wagtail admin integration."
+readme = "README.md"
+authors = [{ name = "Vladimir Tarasov" }]
+license = { text = "MIT" }
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Wagtail",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "wagtail>=6.0",
+    "django-prose-editor>=0.26",
+    "nh3>=0.2.14",
+]
+
+[project.urls]
+Home = "https://github.com/vovansrnd/wagtail-simple-forum"
+Source = "https://github.com/vovansrnd/wagtail-simple-forum"
+Issues = "https://github.com/vovansrnd/wagtail-simple-forum/issues"

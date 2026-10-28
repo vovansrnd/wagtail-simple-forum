@@ -1,0 +1,246 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/topic.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {{ reply_form.media }}
+{% endblock extra_css %}
+
+{% block title %}{{ topic.title }} — {% trans "Forum" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span>{{ topic.section.category.title }}</span>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <a href="{% url 'wagtail_simple_forum:section_view' slug=topic.section.slug %}">{{ topic.section.title }}</a>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{{ topic.title }}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-topic-header">
+        <div class="forum-topic-header__title-row">
+            <h2 class="forum-topic-header__title">{{ topic.title }}</h2>
+            <div class="forum-topic-header__badges">
+                {% if topic.is_pinned %}
+                    <span class="forum-badge forum-badge--pinned"><i class="fa-solid fa-thumbtack" aria-hidden="true"></i> {% trans "pinned" %}</span>
+                {% endif %}
+                {% if topic.is_closed %}
+                    <span class="forum-badge forum-badge--closed"><i class="fa-solid fa-lock" aria-hidden="true"></i> {% trans "closed" %}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="forum-topic-header__meta">
+            <span class="forum-meta-item"><i class="fa-regular fa-folder-open" aria-hidden="true"></i> {{ topic.section.title }}</span>
+            <span class="forum-meta-item"><i class="fa-regular fa-eye" aria-hidden="true"></i> {{ topic.views_count }} {% trans "views" %}</span>
+            <span class="forum-meta-item"><i class="fa-regular fa-comments" aria-hidden="true"></i> {{ topic.posts_count }} {% trans "posts" %}</span>
+        </div>
+        {% if can_moderate %}
+            <div class="forum-topic-header__mod-actions">
+                <form action="{% url 'wagtail_simple_forum:topic_close' slug=topic.slug %}" method="post" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="forum-btn forum-btn--sm forum-btn--ghost">
+                        {% if topic.is_closed %}
+                            <i class="fa-solid fa-lock-open" aria-hidden="true"></i> {% trans "Open" %}
+                        {% else %}
+                            <i class="fa-solid fa-lock" aria-hidden="true"></i> {% trans "Close" %}
+                        {% endif %}
+                    </button>
+                </form>
+                <form action="{% url 'wagtail_simple_forum:topic_pin' slug=topic.slug %}" method="post" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="forum-btn forum-btn--sm forum-btn--ghost">
+                        {% if topic.is_pinned %}
+                            <i class="fa-solid fa-thumbtack" aria-hidden="true"></i> {% trans "Unpin" %}
+                        {% else %}
+                            <i class="fa-solid fa-thumbtack" aria-hidden="true"></i> {% trans "Pin" %}
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if posts_page.paginator.num_pages > 1 %}
+        {% include "wagtail_simple_forum/components/pagination.html" with page_obj=posts_page query_string="" %}
+    {% endif %}
+
+    <div class="forum-posts">
+        {% for post in posts_page %}
+            <div class="forum-post" id="post-{{ post.id }}">
+                <aside class="forum-post__aside">
+                    <div class="forum-post__avatar" aria-hidden="true">{{ post.avatar_tag }}</div>
+                    <strong class="forum-post__author-name" id="post-author-{{ post.id }}">{{ post.display_author_name }}</strong>
+                    {% if post.author_badge_class != "guest" %}
+                        <span class="forum-role-badge forum-role-badge--{{ post.author_badge_class }}">{{ post.author_badge_text }}</span>
+                    {% endif %}
+                </aside>
+                <div class="forum-post__main">
+                    <header class="forum-post__header">
+                        <a href="#post-{{ post.id }}" class="forum-post__date" title="{% trans 'Permalink' %}">
+                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                            <time datetime="{{ post.created_at|date:'c' }}">{{ post.created_at|date:"d.m.Y H:i" }}</time>
+                        </a>
+                        {% if post.edited_at %}
+                            <span class="forum-post__edited" title="{% trans 'Edited' %}">
+                                <i class="fa-solid fa-pencil" aria-hidden="true"></i> {% trans "ed." %} {{ post.edited_at|date:"d.m.Y H:i" }}
+                            </span>
+                        {% endif %}
+                        {% if can_moderate or user == post.author %}
+                            <div class="forum-post__actions" role="group" aria-label="{% trans 'Actions' %}">
+                                <a href="{% url 'wagtail_simple_forum:post_edit' pk=post.id %}" class="forum-post__action-btn" title="{% trans 'Edit' %}">
+                                    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                                </a>
+                                <form action="{% url 'wagtail_simple_forum:post_delete' pk=post.id %}" method="post" class="forum-post__delete-form" onsubmit="return confirm('{% trans 'Delete this post?' %}')">
+                                    {% csrf_token %}
+                                    <button type="submit" class="forum-post__action-btn forum-post__action-btn--danger" title="{% trans 'Delete' %}">
+                                        <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </header>
+                    <div class="forum-post__body">{{ post.content|safe }}</div>
+                    {% if can_reply %}
+                        <footer class="forum-post__footer">
+                            <button type="button" class="forum-post__reply-btn forum-reply-trigger" data-author="{{ post.display_author_name }}">
+                                <i class="fa-solid fa-reply" aria-hidden="true"></i> {% trans "Reply" %}
+                            </button>
+                        </footer>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="forum-empty-state">
+                <i class="fa-regular fa-comment-dots" aria-hidden="true"></i>
+                <p>{% trans "No posts yet." %}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if posts_page.paginator.num_pages > 1 %}
+        {% include "wagtail_simple_forum/components/pagination.html" with page_obj=posts_page query_string="" %}
+    {% endif %}
+
+    <section class="forum-reply-section" id="reply-form" aria-label="{% trans 'Reply form' %}">
+        {% if can_reply %}
+            <div class="forum-reply-compose">
+                <div class="compose-trigger forum-compose-trigger" id="forum-compose-trigger" role="button" tabindex="0">
+                    <span class="compose-avatar compose-avatar--guest" aria-hidden="true"><i class="fa-solid fa-reply"></i></span>
+                    <span class="compose-placeholder" id="forum-compose-placeholder">{% trans "Write a reply..." %}</span>
+                </div>
+                <div class="compose-body" id="forum-compose-body" hidden>
+                    <form method="post" class="compose-form" novalidate data-form-type="forum-reply">
+                        {% csrf_token %}
+                        {{ reply_form.non_field_errors }}
+                        <div style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">{{ reply_form.website_url }}</div>
+                        {{ reply_form.submit_time }}
+                        {% if not user.is_authenticated %}
+                            <div class="compose-guest-row">
+                                <div class="compose-field">{{ reply_form.author_name }}{% if reply_form.author_name.errors %}<div class="compose-error">{{ reply_form.author_name.errors.0 }}</div>{% endif %}</div>
+                                <div class="compose-field">{{ reply_form.author_email }}{% if reply_form.author_email.errors %}<div class="compose-error">{{ reply_form.author_email.errors.0 }}</div>{% endif %}</div>
+                            </div>
+                        {% else %}
+                            <div class="compose-user-row">
+                                <span class="compose-username">{{ user.get_full_name|default:user.username }}</span>
+                            </div>
+                        {% endif %}
+                        <div class="compose-editor">
+                            {{ reply_form.content }}
+                            {% if reply_form.content.errors %}<div class="compose-error">{{ reply_form.content.errors.0 }}</div>{% endif %}
+                        </div>
+                        <div class="compose-footer">
+                            <div class="compose-footer-left">
+                                {% if not user.is_authenticated %}
+                                    <span class="compose-captcha">
+                                        {{ reply_form.captcha_answer.label_tag }} {{ reply_form.captcha_answer }}
+                                        {% if reply_form.captcha_answer.errors %}<span class="compose-error">{{ reply_form.captcha_answer.errors.0 }}</span>{% endif %}
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="compose-footer-right">
+                                <button type="button" class="compose-cancel" id="forum-compose-cancel">{% trans "Cancel" %}</button>
+                                <button type="submit" class="compose-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> {% trans "Reply" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <div class="forum-closed-notice">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i> {% trans "This topic is closed for replies." %}
+            </div>
+        {% endif %}
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        'use strict';
+        const trigger = document.getElementById('forum-compose-trigger');
+        const body = document.getElementById('forum-compose-body');
+        const cancel = document.getElementById('forum-compose-cancel');
+        const placeholder = document.getElementById('forum-compose-placeholder');
+        const form = document.querySelector('form[data-form-type="forum-reply"]');
+
+        if (!trigger || !body || !form) return;
+
+        function insertIntoEditor(htmlContent) {
+            const editorDiv = form.querySelector('.ProseMirror[contenteditable="true"]');
+            if (!editorDiv) return;
+            editorDiv.focus();
+            const p = editorDiv.querySelector('p');
+            if (p) {
+                const range = document.createRange();
+                const selection = window.getSelection();
+                range.selectNodeContents(p);
+                range.collapse(false);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+            document.execCommand('insertHTML', false, htmlContent);
+            editorDiv.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText' }));
+        }
+
+        function openForm(authorName) {
+            body.hidden = false; trigger.hidden = true;
+            trigger.setAttribute('aria-expanded', 'true');
+            if (authorName && placeholder) placeholder.textContent = '{% trans "Reply to" %} ' + authorName + '…';
+            const anchor = document.getElementById('reply-form');
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            if (authorName) {
+                const html = '<p><strong>@' + escapeHtml(authorName) + '</strong>, </p>';
+                setTimeout(() => insertIntoEditor(html), 100);
+            } else {
+                setTimeout(() => {
+                    const editor = form.querySelector('.ProseMirror');
+                    if (editor) editor.focus();
+                }, 100);
+            }
+        }
+
+        function closeForm() {
+            body.hidden = true; trigger.hidden = false;
+            trigger.setAttribute('aria-expanded', 'false');
+            if (placeholder) placeholder.textContent = '{% trans "Write a reply..." %}';
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        }
+
+        trigger.addEventListener('click', () => openForm(''));
+        trigger.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openForm(''); } });
+        if (cancel) cancel.addEventListener('click', closeForm);
+        document.querySelectorAll('.forum-reply-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openForm(btn.dataset.author || '');
+            });
+        });
+
+        {% if reply_form.errors %}openForm('');{% endif %}
+    });
+    </script>
+{% endblock forum_content %}

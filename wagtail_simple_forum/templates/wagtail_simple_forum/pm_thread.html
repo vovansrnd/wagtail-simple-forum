@@ -1,0 +1,88 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/pm_thread.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}{{ thread.subject }} — {% trans "Private Messages" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <a href="{% url 'wagtail_simple_forum:pm_inbox' %}">{% trans "Private Messages" %}</a>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{{ thread.subject }}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-topic-header">
+        <div class="forum-topic-header__title-row">
+            <h2 class="forum-topic-header__title">{{ thread.subject }}</h2>
+        </div>
+        <div class="forum-topic-header__meta">
+            <span class="forum-meta-item"><i class="fa-regular fa-user" aria-hidden="true"></i> {{ other_user_display }}</span>
+            <span class="forum-meta-item"><i class="fa-regular fa-comments" aria-hidden="true"></i> {{ thread.messages_count }}</span>
+            <span class="forum-meta-item"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ thread.last_message_at|default:thread.created_at|date:"d.m.Y H:i" }}</span>
+        </div>
+    </div>
+
+    <div class="forum-posts" role="list">
+        {% for pm in thread_messages %}
+            <article class="forum-post" id="pm-{{ pm.id }}" role="listitem">
+                <aside class="forum-post__aside">
+                    <div class="forum-post__avatar" aria-hidden="true">{{ pm.avatar_tag }}</div>
+                    <strong class="forum-post__author-name">{{ pm.display_author_name }}</strong>
+                    {% if pm.author_badge_class != "guest" %}
+                        <span class="forum-role-badge forum-role-badge--{{ pm.author_badge_class }}">{{ pm.author_badge_text }}</span>
+                    {% endif %}
+                </aside>
+                <div class="forum-post__main">
+                    <header class="forum-post__header">
+                        <a href="#pm-{{ pm.id }}" class="forum-post__date" title="{% trans 'Permalink' %}">
+                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                            <time datetime="{{ pm.created_at|date:'c' }}">{{ pm.created_at|date:"d.m.Y H:i" }}</time>
+                        </a>
+                        {% if pm.edited_at %}
+                            <span class="forum-post__edited" title="{% trans 'Edited' %}">
+                                <i class="fa-solid fa-pencil" aria-hidden="true"></i> {% trans "ed." %} {{ pm.edited_at|date:"d.m.Y H:i" }}
+                            </span>
+                        {% endif %}
+                    </header>
+                    <div class="forum-post__body">{{ pm.content|safe }}</div>
+                </div>
+            </article>
+        {% empty %}
+            <div class="forum-empty-state">
+                <i class="fa-regular fa-envelope-open" aria-hidden="true"></i>
+                <p>{% trans "No messages yet." %}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="forum-form-page">
+        <h2 class="forum-form-page__title">
+            <i class="fa-solid fa-reply" aria-hidden="true"></i> {% trans "Reply" %}
+        </h2>
+        <form method="post" class="forum-form" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="forum-field">
+                <label for="{{ form.content.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-align-left" aria-hidden="true"></i> {{ form.content.label }}
+                </label>
+                <div class="forum-editor-wrap">{{ form.content }}</div>
+                {% if form.content.errors %}<div class="forum-field__error">{{ form.content.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="forum-form__actions">
+                <a href="{% url 'wagtail_simple_forum:pm_inbox' %}" class="forum-btn forum-btn--ghost">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> {% trans "Back to list" %}
+                </a>
+                <button type="submit" class="forum-btn forum-btn--primary">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> {% trans "Send" %}
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock forum_content %}

@@ -1,0 +1,94 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/topic_form.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans "New topic" %} — {{ section.title }} — {% trans "Forum" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span>{{ section.category.title }}</span>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <a href="{% url 'wagtail_simple_forum:section_view' slug=section.slug %}">{{ section.title }}</a>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{% trans "New topic" %}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-form-page">
+        <h2 class="forum-form-page__title">
+            <i class="fa-solid fa-plus-circle" aria-hidden="true"></i>
+            {% blocktrans with section_title=section.title %}New topic in section «{{ section_title }}»{% endblocktrans %}
+        </h2>
+        <form method="post" class="forum-form" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+                {{ form.website_url }}
+            </div>
+            {{ form.submit_time }}
+
+            <div class="forum-field">
+                <label for="{{ form.title.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-heading" aria-hidden="true"></i>
+                    {{ form.title.label }}
+                </label>
+                {{ form.title }}
+                {% if form.title.errors %}<div class="forum-field__error">{{ form.title.errors.0 }}</div>{% endif %}
+            </div>
+
+            {% if not user.is_authenticated %}
+                <div class="forum-guest-row">
+                    <div class="forum-field">
+                        <label for="{{ form.author_name.id_for_label }}" class="forum-field__label">
+                            <i class="fa-solid fa-user" aria-hidden="true"></i>
+                            {{ form.author_name.label }}
+                        </label>
+                        {{ form.author_name }}
+                        {% if form.author_name.errors %}<div class="forum-field__error">{{ form.author_name.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="forum-field">
+                        <label for="{{ form.author_email.id_for_label }}" class="forum-field__label">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            {{ form.author_email.label }}
+                        </label>
+                        {{ form.author_email }}
+                        {% if form.author_email.errors %}<div class="forum-field__error">{{ form.author_email.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="forum-field">
+                <label for="{{ form.content.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-align-left" aria-hidden="true"></i>
+                    {{ form.content.label }}
+                </label>
+                <div class="forum-editor-wrap">{{ form.content }}</div>
+                {% if form.content.errors %}<div class="forum-field__error">{{ form.content.errors.0 }}</div>{% endif %}
+            </div>
+
+            {% if not user.is_authenticated %}
+                <div class="forum-field forum-field--captcha">
+                    <label for="{{ form.captcha_answer.id_for_label }}" class="forum-field__label">{{ form.captcha_answer.label }}</label>
+                    {{ form.captcha_answer }}
+                    {% if form.captcha_answer.errors %}<div class="forum-field__error">{{ form.captcha_answer.errors.0 }}</div>{% endif %}
+                </div>
+            {% endif %}
+
+            <div class="forum-form__actions">
+                <a href="{% url 'wagtail_simple_forum:section_view' slug=section.slug %}" class="forum-btn forum-btn--ghost">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    {% trans "Back" %}
+                </a>
+                <button type="submit" class="forum-btn forum-btn--primary">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    {% trans "Create topic" %}
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock forum_content %}

@@ -1,0 +1,59 @@
+{# wagtail_simple_forum/templates/wagtail_simple_forum/pm_new.html #}
+{% extends "wagtail_simple_forum/base_forum.html" %}
+{% load i18n %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans "New private message" %} — {% trans "Forum" %}{% endblock %}
+
+{% block forum_breadcrumbs %}
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <a href="{% url 'wagtail_simple_forum:pm_inbox' %}">{% trans "Private Messages" %}</a>
+    <span class="forum-breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{% trans "New message" %}</span>
+{% endblock %}
+
+{% block forum_content %}
+    <div class="forum-form-page">
+        <h2 class="forum-form-page__title">
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+            {% trans "New private message" %}
+        </h2>
+        <form method="post" class="forum-form" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="forum-field">
+                <label for="{{ form.recipient_username.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i> {{ form.recipient_username.label }}
+                </label>
+                {{ form.recipient_username }}
+                {% if form.recipient_username.errors %}<div class="forum-field__error">{{ form.recipient_username.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="forum-field">
+                <label for="{{ form.subject.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-heading" aria-hidden="true"></i> {{ form.subject.label }}
+                </label>
+                {{ form.subject }}
+                {% if form.subject.errors %}<div class="forum-field__error">{{ form.subject.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="forum-field">
+                <label for="{{ form.content.id_for_label }}" class="forum-field__label">
+                    <i class="fa-solid fa-align-left" aria-hidden="true"></i> {{ form.content.label }}
+                </label>
+                <div class="forum-editor-wrap">{{ form.content }}</div>
+                {% if form.content.errors %}<div class="forum-field__error">{{ form.content.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="forum-form__actions">
+                <a href="{% url 'wagtail_simple_forum:pm_inbox' %}" class="forum-btn forum-btn--ghost">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> {% trans "Back" %}
+                </a>
+                <button type="submit" class="forum-btn forum-btn--primary">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> {% trans "Send" %}
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock forum_content %}
