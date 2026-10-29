@@ -62,7 +62,7 @@
                                 </h3>
                                 <div class="forum-search-result__meta">
                                     <span><i class="fa-regular fa-folder-open" aria-hidden="true"></i> {{ topic.section.category.title }} / {{ topic.section.title }}</span>
-                                    <span><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ topic.activity_at|date:"d.m.Y" }}</span>
+                                    <span><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ topic.last_post_at|default:topic.created_at|date:"d.m.Y" }}</span>
                                     <span><i class="fa-regular fa-comments" aria-hidden="true"></i> {{ topic.posts_count }}</span>
                                     {% if topic.is_pinned %}<span class="forum-badge forum-badge--pinned">{% trans "pinned" %}</span>{% endif %}
                                     {% if topic.is_closed %}<span class="forum-badge forum-badge--closed">{% trans "closed" %}</span>{% endif %}

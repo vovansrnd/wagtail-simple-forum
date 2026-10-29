@@ -30,7 +30,7 @@
             <div style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
                 {{ form.website_url }}
             </div>
-            {{ form.submit_time }}
+            {% for hidden in form.hidden_fields %}{% if hidden.name != "website_url" %}{{ hidden }}{% endif %}{% endfor %}
 
             <div class="forum-field">
                 <label for="{{ form.title.id_for_label }}" class="forum-field__label">

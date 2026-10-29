@@ -94,7 +94,7 @@ class ForumAuthorDisplayMixin:
         moderator_groups = getattr(settings, "FORUM_MODERATOR_GROUPS", None)
         in_mod_group = bool(
             moderator_groups
-            and author.groups.filter(name__in=moderator_groups).exists()
+            and any(group.name in moderator_groups for group in author.groups.all())
         )
 
         if is_staff_mod or has_perm_mod or in_mod_group:

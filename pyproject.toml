@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "wagtail-simple-forum"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lightweight, responsive forum with private messaging, anti-spam, and Wagtail admin integration."
 readme = "README.md"
 authors = [{ name = "Vladimir Tarasov" }]
@@ -25,3 +25,4 @@ dependencies = [
 Home = "https://github.com/vovansrnd/wagtail-simple-forum"
 Source = "https://github.com/vovansrnd/wagtail-simple-forum"
 Issues = "https://github.com/vovansrnd/wagtail-simple-forum/issues"
+PyPI = "https://pypi.org/project/wagtail-simple-forum/"

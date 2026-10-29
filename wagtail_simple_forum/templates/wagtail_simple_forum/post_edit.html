@@ -1,6 +1,6 @@
 {# wagtail_simple_forum/templates/wagtail_simple_forum/post_edit.html #}
 {% extends "wagtail_simple_forum/base_forum.html" %}
-{% load i18n %}
+{% load i18n forum_tags %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -29,7 +29,7 @@
                 <strong>{{ post.display_author_name }}</strong>
                 <time datetime="{{ post.created_at|date:'c' }}">{{ post.created_at|date:"d.m.Y H:i" }}</time>
             </div>
-            <div class="forum-edit-preview__body">{{ post.content|safe }}</div>
+            <div class="forum-edit-preview__body">{{ post.content|forum_html }}</div>
         </div>
         <form method="post" class="forum-form" novalidate>
             {% csrf_token %}

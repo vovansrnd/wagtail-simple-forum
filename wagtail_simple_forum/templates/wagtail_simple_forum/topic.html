@@ -1,6 +1,6 @@
 {# wagtail_simple_forum/templates/wagtail_simple_forum/topic.html #}
 {% extends "wagtail_simple_forum/base_forum.html" %}
-{% load i18n %}
+{% load i18n forum_tags %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -101,7 +101,7 @@
                             </div>
                         {% endif %}
                     </header>
-                    <div class="forum-post__body">{{ post.content|safe }}</div>
+                    <div class="forum-post__body">{{ post.content|forum_html }}</div>
                     {% if can_reply %}
                         <footer class="forum-post__footer">
                             <button type="button" class="forum-post__reply-btn forum-reply-trigger" data-author="{{ post.display_author_name }}">
@@ -135,7 +135,7 @@
                         {% csrf_token %}
                         {{ reply_form.non_field_errors }}
                         <div style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">{{ reply_form.website_url }}</div>
-                        {{ reply_form.submit_time }}
+                        {% for hidden in reply_form.hidden_fields %}{% if hidden.name != "website_url" %}{{ hidden }}{% endif %}{% endfor %}
                         {% if not user.is_authenticated %}
                             <div class="compose-guest-row">
                                 <div class="compose-field">{{ reply_form.author_name }}{% if reply_form.author_name.errors %}<div class="compose-error">{{ reply_form.author_name.errors.0 }}</div>{% endif %}</div>

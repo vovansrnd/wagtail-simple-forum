@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.signing import SignatureExpired, TimestampSigner
 from django.utils.html import strip_tags
+from django.utils.crypto import salted_hmac
 from django.utils.translation import gettext_lazy as _
 from django_prose_editor.fields import ProseEditorFormField
 
@@ -23,10 +24,14 @@ _signer = TimestampSigner(salt="wagtail_simple_forum_antispam")
 
 
 def _generate_captcha_signature(a, b, timestamp):
-    """Generates cryptographic token to verify math captcha without session storage."""
-    secret = settings.SECRET_KEY
-    payload = f"{a}:{b}:{timestamp}:{secret}"
-    return hashlib.sha256(payload.encode()).hexdigest()[:16]
+    """Sign a challenge without writing session state during a cached GET."""
+    payload = f"{int(a)}:{int(b)}:{int(timestamp)}"
+    return salted_hmac(
+        "wagtail_simple_forum.captcha",
+        payload,
+        secret=settings.SECRET_KEY,
+        algorithm="sha256",
+    ).hexdigest()[:32]
 
 
 class ForumAntiSpamForm(forms.Form):
@@ -54,11 +59,13 @@ class ForumAntiSpamForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
+        self._validated_submit_token = None
+        self._validated_captcha_sig = None
 
         is_auth = self.request and self.request.user.is_authenticated
 
         if not self.is_bound:
-            self.fields["submit_token"].initial = _signer.sign(secrets.token_hex(8))
+            self.fields["submit_token"].initial = _signer.sign(str(int(time.time())))
 
         if is_auth:
             user = self.request.user
@@ -116,33 +123,28 @@ class ForumAntiSpamForm(forms.Form):
             raise forms.ValidationError(
                 _("Security verification token missing."), code="token_missing"
             )
-
         try:
-            # Enforce maximum form lifetime (12 hours)
-            _signer.unsign(token, max_age=43200)
+            raw_timestamp = _signer.unsign(token, max_age=43200)
+            created_at = int(raw_timestamp)
         except SignatureExpired:
             raise forms.ValidationError(
                 _("Form session expired. Please refresh the page."),
                 code="token_expired",
             )
-        except Exception:
+        except Exception as exc:
             raise forms.ValidationError(
                 _("Security verification failed."), code="token_invalid"
+            ) from exc
+        age = time.time() - created_at
+        if age < 3:
+            raise forms.ValidationError(
+                _("You submitted the form suspiciously fast."), code="too_fast"
             )
-
-        # Enforce minimum submission speed (at least 3 seconds)
-        try:
-            timestamp = int(_signer.timestamp(token))
-            current_ts = int(_signer.timestamp(_signer.sign("now")))
-            if current_ts - timestamp < 3:
-                raise forms.ValidationError(
-                    _("You submitted the form suspiciously fast."), code="too_fast"
-                )
-        except forms.ValidationError:
-            raise
-        except Exception:
-            pass
-
+        if age > 43200:
+            raise forms.ValidationError(
+                _("Form session expired. Please refresh the page."), code="token_expired"
+            )
+        self._validated_submit_token = token
         return token
 
     def clean_captcha_answer(self):
@@ -181,7 +183,33 @@ class ForumAntiSpamForm(forms.Form):
                 code="captcha_invalid",
             )
 
+        self._validated_captcha_sig = sig
         return user_ans
+
+    def clean(self):
+        cleaned_data = super().clean()
+        # Cached HTML can contain the same signed challenge for different users.
+        # Track reuse per session and consume only after all fields validate.
+        if self.errors or not self.request:
+            return cleaned_data
+        tokens = []
+        if self._validated_submit_token:
+            tokens.append("submit:" + hashlib.sha256(self._validated_submit_token.encode()).hexdigest())
+        if self._validated_captcha_sig:
+            tokens.append("captcha:" + self._validated_captcha_sig)
+        if not tokens:
+            return cleaned_data
+        session_key = "wagtail_simple_forum_used_antispam_tokens"
+        used = self.request.session.get(session_key, [])
+        if not isinstance(used, list):
+            used = []
+        if any(token in used for token in tokens):
+            raise forms.ValidationError(
+                _("This verification challenge has already been used. Refresh the page."),
+                code="token_replayed",
+            )
+        self.request.session[session_key] = (used + tokens)[-100:]
+        return cleaned_data
 
 
 class ForumTopicForm(ForumAntiSpamForm):

@@ -513,7 +513,7 @@ def topic_view(request, slug):
             topic.views_count += 1
 
     posts_per_page = _posts_per_page()
-    posts_qs = topic.posts.select_related("author", "author__forum_legacy_map", "edited_by")
+    posts_qs = topic.posts.select_related("author", "author__forum_legacy_map", "edited_by").prefetch_related("author__groups")
     if not can_mod:
         posts_qs = posts_qs.filter(is_approved=True, is_deleted=False)
     posts_qs = posts_qs.order_by("created_at", "id")
@@ -620,6 +620,8 @@ def post_edit(request, pk):
     is_owner = request.user.is_authenticated and post.author_id == request.user.id
     if not (can_mod or is_owner):
         return HttpResponseForbidden(_("Access denied."))
+    if post.topic.is_closed and not can_mod:
+        return HttpResponseForbidden(_("This topic is closed. Posts cannot be modified."))
 
     if post.is_deleted and not can_mod:
         raise Http404()
@@ -665,6 +667,8 @@ def post_delete(request, pk):
 
     if not (can_mod or is_owner):
         return HttpResponseForbidden(_("Access denied."))
+    if post.topic.is_closed and not can_mod:
+        return HttpResponseForbidden(_("This topic is closed. Posts cannot be modified."))
 
     first_post = (
         post.topic.posts.filter(is_deleted=False).order_by("created_at", "id").first()

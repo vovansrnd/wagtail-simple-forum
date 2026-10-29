@@ -23,7 +23,7 @@
                 {% trans "Compose" %}
             </a>
         </div>
-        {% if threads %}
+        {% if threads_page.object_list %}
             <div class="forum-topic-table" role="table" aria-label="{% trans 'Private Messages' %}">
                 <div class="forum-topic-row forum-topic-row--head" role="row">
                     <div class="forum-topic-cell forum-topic-cell--title" role="columnheader">{% trans "Topic" %}</div>
@@ -37,7 +37,7 @@
                         <span class="sr-only">{% trans "Date" %}</span>
                     </div>
                 </div>
-                {% for thread in threads %}
+                {% for thread in threads_page %}
                     <div class="forum-topic-row" role="row">
                         <div class="forum-topic-cell forum-topic-cell--title" role="cell">
                             <div class="forum-topic-icon" aria-hidden="true"><i class="fa-regular fa-envelope"></i></div>
