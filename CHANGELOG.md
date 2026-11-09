@@ -2,6 +2,29 @@
 
 All notable changes for this package are documented here. Version numbers below are **prepared release candidates** in this audit bundle; they are not a claim that those versions have already been uploaded to PyPI.
 
+## [0.1.2] — 2026-11-09 — prepared, not yet published
+
+- Rebuilt so the wheel matches repository HEAD: PyPI's 0.1.1 was cut
+  before the 2026-10-29 follow-up fixes (eb2f670) landed.
+- Private messages: inbox/threads render the paginated `threads_page`
+  context (the old `threads` variable no longer exists).
+- Topic/reply forms render ALL hidden anti-spam fields again
+  (submit_token, captcha challenge) instead of the removed
+  `form.submit_time`.
+- submit_token now signs the form creation timestamp server-side:
+  maximum lifetime 12 h, submissions faster than 3 s are rejected,
+  tampered signatures rejected; captcha signature uses salted HMAC.
+- Per-session replay protection: consumed tokens are tracked in the
+  session and rejected on reuse, consumed only after every field
+  validates.
+- Staff can edit posts in closed topics; redundant per-request group
+  queries removed.
+- 13 regression tests added (token states, captcha, templates) that
+  run against the installed wheel.
+
+**Rollback:** `pip install wagtail-simple-forum==0.1.1` (PyPI).
+**Tested with:** Wagtail 8.0.1/8.1, Django 6.0.9, Python 3.14.
+
 ## [0.1.1] — 2026-10-29 — prepared, not yet published
 
 - Sanitize stored post output including legacy-imported content; improve security guidance and operational migration checklist.
