@@ -14,27 +14,27 @@
 - Import command for the old `forum` app, preserving `legacy_id` links and legacy user mappings.
 - Template overrides and CSS hooks for matching a site's theme.
 
-## Audit/release status
 
-This source bundle prepares version `0.1.1` for a possible next release. Static syntax/package checks have been run, but a full Django/Wagtail integration suite has not run in the bundle build environment. Do not upload to PyPI until the release checklist in `../../04-docs/UPGRADE_AND_RELEASE.md` is complete.
+## Compatibility
+
+The package metadata declares a minimum of `wagtail>=6.0`; that is the
+supported floor, not the full test matrix. What is actually tested:
+Wagtail 8.0.1 and 8.1 with Django 6.0.9 on Python 3.14 (the production
+stack of the originating project). Other combinations may work but are
+not covered by the test suite.
 
 ## Requirements and installation
 
 Package metadata declares `wagtail>=6.0`, `django-prose-editor>=0.26`, and `nh3>=0.2.14`.
 
 ```bash
-pip install wagtail-simple-forum
+pip install wagtail-simple-forum==0.1.2
 ```
-
-To install **the candidate source in this bundle** (rather than the already-published PyPI release), run from this package directory:
 
 ```bash
 python -m pip install .
-# For editable development instead:
-python -m pip install -e .
 ```
 
-`pip install wagtail-simple-forum` selects the version currently published on PyPI. The candidate version shown in `pyproject.toml` is not published by this archive operation; publish it only after the release checklist in `../../04-docs/UPGRADE_AND_RELEASE.md` passes.
 
 
 Add the app after its dependencies:

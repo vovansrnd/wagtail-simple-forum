@@ -1,8 +1,8 @@
 # Changelog — wagtail-simple-forum
 
-All notable changes for this package are documented here. Version numbers below are **prepared release candidates** in this audit bundle; they are not a claim that those versions have already been uploaded to PyPI.
+All notable changes for this package are documented here. PyPI availability is tracked per release: entries below describe the package state at that version; publication happens separately once approved.
 
-## [0.1.2] — 2026-11-09 — prepared, not yet published
+## [0.1.2] — 2026-11-09
 
 - Rebuilt so the wheel matches repository HEAD: PyPI's 0.1.1 was cut
   before the 2026-10-29 follow-up fixes (eb2f670) landed.
@@ -25,7 +25,7 @@ All notable changes for this package are documented here. Version numbers below 
 **Rollback:** `pip install wagtail-simple-forum==0.1.1` (PyPI).
 **Tested with:** Wagtail 8.0.1/8.1, Django 6.0.9, Python 3.14.
 
-## [0.1.1] — 2026-10-29 — prepared, not yet published
+## [0.1.1] — 2026-10-29
 
 - Sanitize stored post output including legacy-imported content; improve security guidance and operational migration checklist.
 - Expanded installation, security, troubleshooting, storage/integration and multi-language documentation.
