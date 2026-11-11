@@ -18,10 +18,12 @@
 ## Compatibility
 
 The package metadata declares a minimum of `wagtail>=6.0`; that is the
-supported floor, not the full test matrix. What is actually tested:
-Wagtail 8.0.1 and 8.1 with Django 6.0.9 on Python 3.14 (the production
-stack of the originating project). Other combinations may work but are
-not covered by the test suite.
+supported floor, not the full test matrix. The two tested configurations
+differ in kind: Wagtail 8.0.1 is covered by integration tests of the
+originating project with editable installs of this package, while
+Wagtail 8.1 was tested against the target production stack with clean
+wheel and sdist installs — both with Django 6.0.9 on Python 3.14.
+Other combinations may work but are not covered by the test suite.
 
 ## Requirements and installation
 

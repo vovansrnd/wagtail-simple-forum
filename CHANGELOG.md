@@ -1,5 +1,10 @@
 # Changelog — wagtail-simple-forum
 
+## [0.1.3] — Unreleased
+
+- Skip redundant permission and moderator-group checks when staff users are already moderators by host configuration.
+
+
 All notable changes for this package are documented here. PyPI availability is tracked per release: entries below describe the package state at that version; publication happens separately once approved.
 
 ## [0.1.2] — 2026-11-09
