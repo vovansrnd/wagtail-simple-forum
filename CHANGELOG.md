@@ -1,8 +1,11 @@
 # Changelog — wagtail-simple-forum
 
-## [0.1.3] — Unreleased
+## [0.1.3] — 2026-11-14
 
 - Skip redundant permission and moderator-group checks when staff users are already moderators by host configuration.
+- Add dependency constraint `django-js-asset<5`: django-js-asset 5.x renames the
+  import module and rejects import-map js lists, which breaks the media of
+  django-prose-editor 0.27.x forms on fresh installs.
 
 
 All notable changes for this package are documented here. PyPI availability is tracked per release: entries below describe the package state at that version; publication happens separately once approved.

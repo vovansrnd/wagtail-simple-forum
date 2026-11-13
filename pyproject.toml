@@ -22,6 +22,11 @@ classifiers = [
 dependencies = [
     "wagtail>=6.0",
     "django-prose-editor>=0.26",
+    # django-js-asset 5.x переименовал модуль (django_js_asset -> js_asset) и
+    # отвергает import-map js-списки: media django-prose-editor 0.27.x ломается
+    # на чистых установках (TypeError при рендере форм). Ядро проекта пинит
+    # 4.2.0 — фиксируем совместимую границу в метаданных пакета.
+    "django-js-asset<5",
     "nh3>=0.2.14",
 ]
 
