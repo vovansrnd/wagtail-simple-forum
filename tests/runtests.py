@@ -2,7 +2,8 @@
 """Д61: запуск регрессионных тестов антиполей/токена/шаблонов.
 
 Гарантирует, что тестируется WHEEL-установка wagtail_simple_forum из
-site-packages (0.1.2), а не editable-исходники: runtests падает, если
+site-packages (версия из pyproject — 0.1.3 на ветке d67-batch-c), а не
+editable-исходники: runtests падает, если
 пакет импортировался из каталога исходников.
 
     python runtests.py
