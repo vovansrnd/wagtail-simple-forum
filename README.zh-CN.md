@@ -110,3 +110,6 @@ urlpatterns = [
 
 MIT. 源代码: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 版本说明
+
+- 需要 `django-js-asset<5`：5.x 版本重命名了可导入模块并拒绝 import-map js 列表，这会在全新安装时破坏 django-prose-editor 0.27.x 表单的 media。

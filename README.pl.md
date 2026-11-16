@@ -110,3 +110,6 @@ Jeśli przepływ nie działa, sprawdź konfigurację aplikacji, migracje, kolejn
 
 MIT. Kod źródłowy: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Informacje o wydaniu 0.1.3
+
+- Wymaga `django-js-asset<5`: wersja 5.x zmienia nazwę importowalnego modułu i odrzuca listy js import-map, co psuje media formularzy django-prose-editor 0.27.x przy świeżych instalacjach.

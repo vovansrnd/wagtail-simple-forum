@@ -110,3 +110,6 @@ urlpatterns = [
 
 MIT. 소스 코드: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 릴리스 노트
+
+- `django-js-asset<5` 필요: 버전 5.x는 임포트 가능한 모듈 이름을 변경하고 import-map js 목록을 거부하여, 신규 설치에서 django-prose-editor 0.27.x 폼의 미디어가 깨집니다.

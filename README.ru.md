@@ -110,3 +110,6 @@ URL форума и legacy-переадресации должны стоять 
 
 MIT. Исходный код: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Примечания к версии 0.1.3
+
+- Требуется `django-js-asset<5`: версия 5.x переименовала импортируемый модуль и отвергает import-map js-списки — media django-prose-editor 0.27.x ломается на чистых установках.

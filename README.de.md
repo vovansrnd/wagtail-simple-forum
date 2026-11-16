@@ -110,3 +110,6 @@ Wenn der Ablauf nicht funktioniert, prüfen Sie App-Konfiguration, Migrationen, 
 
 MIT. Quellcode: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Versionshinweise 0.1.3
+
+- Erfordert `django-js-asset<5`: Version 5.x benennt das importierbare Modul um und lehnt Import-Map-js-Listen ab — das bricht die Media von django-prose-editor 0.27.x-Formen bei Neuinstallationen.

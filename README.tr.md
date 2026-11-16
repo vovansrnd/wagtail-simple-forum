@@ -110,3 +110,6 @@ Akış çalışmıyorsa uygulama ayarlarını, geçişleri, URL sırasını, kul
 
 MIT. Kaynak kod: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 Sürüm notları
+
+- `django-js-asset<5` gereklidir: 5.x sürümü içe aktarılabilir modülü yeniden adlandırır ve import-map js listelerini reddeder — bu, yeni kurulumlarda django-prose-editor 0.27.x formlarının medyasını bozar.

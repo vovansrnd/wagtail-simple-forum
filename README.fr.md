@@ -110,3 +110,6 @@ Si le flux ne fonctionne pas, vérifiez la configuration de l’application, les
 
 MIT. Code source: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Notes de version 0.1.3
+
+- Nécessite `django-js-asset<5` : la version 5.x renomme le module importable et refuse les listes js d'import-map, ce qui casse le media des formulaires django-prose-editor 0.27.x sur les nouvelles installations.

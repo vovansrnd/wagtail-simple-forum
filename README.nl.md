@@ -110,3 +110,6 @@ Als de workflow niet werkt, controleer appconfiguratie, migraties, URL-volgorde,
 
 MIT. Broncode: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Releaseopmerkingen 0.1.3
+
+- Vereist `django-js-asset<5`: versie 5.x hernoemt het importeerbare module en weigert import-map js-lijsten — dit breekt de media van django-prose-editor 0.27.x-formulieren bij nieuwe installaties.
