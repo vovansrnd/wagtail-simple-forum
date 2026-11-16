@@ -13,7 +13,7 @@ import sys
 
 import django
 
-# tests-пакет — в КОНЕЦ sys.path: site-packages (wheel 0.1.2) должен
+# tests-пакет — в КОНЕЦ sys.path: site-packages (wheel из pyproject) должен
 # выигрывать импорт wagtail_simple_forum у каталога исходников.
 _repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 for _p in (_tests_dir := os.path.dirname(os.path.abspath(__file__)), _repo_root):
