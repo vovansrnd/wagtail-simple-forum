@@ -13,7 +13,7 @@
 
 ## 要件と互換性
 
-- 宣言されている依存関係: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- 宣言されている依存関係: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - Python、Django、Wagtail の互換性は組み合わせて確認してください。最低依存バージョンは全バージョンのサポートを意味しません。
 
 パッケージのメタデータでは Wagtail >= 6.0 を宣言していますが、最小依存バージョンは全バージョンでの互換性を保証しません。このアーカイブには、すべての Django/Wagtail 組み合わせを網羅する自動テストマトリクスはありません。本番環境を更新する前に、正確なバージョン、データベース、ストレージバックエンド、デプロイ設定をステージングで確認してください。
@@ -110,3 +110,6 @@ urlpatterns = [
 
 MIT. ソースコード: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 リリースノート
+
+- `django-js-asset<5` が必要です：バージョン 5.x はインポート可能なモジュール名を変更し、import-map の js リストを拒否するため、新規インストールでは django-prose-editor 0.27.x フォームのメディアが壊れます。

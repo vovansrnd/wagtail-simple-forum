@@ -13,7 +13,7 @@
 
 ## Requisitos e compatibilidade
 
-- Dependências declaradas: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- Dependências declaradas: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - A compatibilidade entre Python, Django e Wagtail deve ser verificada em conjunto. A dependência mínima do pacote não confirma suporte a todas as versões.
 
 Os metadados declaram Wagtail >= 6.0, mas uma dependência mínima não comprova compatibilidade. Este arquivo não inclui uma matriz automatizada completa para todas as combinações de Django/Wagtail. Antes de atualizar produção, teste as versões exatas, o banco de dados, o armazenamento e as configurações de implantação em staging.
@@ -110,3 +110,6 @@ Se o fluxo não funcionar, confira a configuração do app, migrações, ordem d
 
 MIT. Código-fonte: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## Notas da versão 0.1.3
+
+- Requer `django-js-asset<5`: a versão 5.x renomeia o módulo importável e rejeita listas js de import-map, quebrando o media dos formulários django-prose-editor 0.27.x em instalações novas.

@@ -13,7 +13,7 @@
 
 ## Gereksinimler ve uyumluluk
 
-- Bildirilen bağımlılıklar: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- Bildirilen bağımlılıklar: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - Python, Django ve Wagtail uyumluluğu birlikte kontrol edilmelidir. Paketin asgari bağımlılığı tüm sürümlerin desteklendiğini kanıtlamaz.
 
 Paket metaverisi Wagtail >= 6.0 belirtir; ancak asgari bağımlılık, tüm sürümlerle uyumluluğu kanıtlamaz. Bu arşiv tüm Django/Wagtail kombinasyonları için tam otomatik test matrisi içermez. Üretimi yükseltmeden önce tam sürümleri, veritabanını, depolama arka ucunu ve dağıtım ayarlarını staging ortamında sınayın.
@@ -110,3 +110,6 @@ Akış çalışmıyorsa uygulama ayarlarını, geçişleri, URL sırasını, kul
 
 MIT. Kaynak kod: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 Sürüm notları
+
+- `django-js-asset<5` gereklidir: 5.x sürümü içe aktarılabilir modülü yeniden adlandırır ve import-map js listelerini reddeder — bu, yeni kurulumlarda django-prose-editor 0.27.x formlarının medyasını bozar.

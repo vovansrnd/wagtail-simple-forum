@@ -14,27 +14,31 @@
 - Import command for the old `forum` app, preserving `legacy_id` links and legacy user mappings.
 - Template overrides and CSS hooks for matching a site's theme.
 
-## Audit/release status
 
-This source bundle prepares version `0.1.1` for a possible next release. Static syntax/package checks have been run, but a full Django/Wagtail integration suite has not run in the bundle build environment. Do not upload to PyPI until the release checklist in `../../04-docs/UPGRADE_AND_RELEASE.md` is complete.
+## Compatibility
+
+The package metadata declares a minimum of `wagtail>=6.0`; that is the
+supported floor, not the full test matrix. The two tested configurations
+differ in kind: Wagtail 8.0.1 is covered by integration tests of the
+originating project with editable installs of this package, while
+Wagtail 8.1 was tested against the target production stack with clean
+wheel and sdist installs — both with Django 6.0.9 on Python 3.14.
+Other combinations may work but are not covered by the test suite.
 
 ## Requirements and installation
 
-Package metadata declares `wagtail>=6.0`, `django-prose-editor>=0.26`, and `nh3>=0.2.14`.
+Package metadata declares `wagtail>=6.0`, `django-prose-editor>=0.26`, `django-js-asset<5`, and `nh3>=0.2.14`.
 
 ```bash
-pip install wagtail-simple-forum
+# Last version published on PyPI:
+pip install wagtail-simple-forum==0.1.2
 ```
 
-To install **the candidate source in this bundle** (rather than the already-published PyPI release), run from this package directory:
-
 ```bash
+# Candidate 0.1.3 — sources of this branch, NOT yet published on PyPI:
 python -m pip install .
-# For editable development instead:
-python -m pip install -e .
 ```
 
-`pip install wagtail-simple-forum` selects the version currently published on PyPI. The candidate version shown in `pyproject.toml` is not published by this archive operation; publish it only after the release checklist in `../../04-docs/UPGRADE_AND_RELEASE.md` passes.
 
 
 Add the app after its dependencies:
@@ -123,10 +127,10 @@ The old app must be available to Django while the importer reads it. After valid
 ## Security and operations
 
 - Run the package migrations and test posting as a guest, member, moderator, and administrator. Also verify that private-message inboxes and thread pages display paginated results, required hidden anti-spam fields are rendered, and closed topics cannot be edited/deleted by regular owners.
-- Check rate limits, moderation, private-message access, signed-token expiry/replay behavior, and email content in a staging environment. Token reuse is tracked per browser session to remain compatible with shared page caches.
+- Check rate limits, moderation, private-message access, signed-token expiry/replay behavior, and email content in a staging environment. Token reuse is detected sequentially per browser session to remain compatible with shared page caches; parallel double-submits of the same session are not atomic and are out of scope of this guarantee.
 - Do not render stored post HTML with an unconditional `|safe`; use the package rendering/sanitization path.
 - Test legacy redirects before making them permanent; permanent redirects can be cached by browsers and search engines.
-- The source bundle does not include a full automated test suite or a version-by-version runtime compatibility matrix.
+- The source bundle includes the plugin's functional regression test suite (`tests/`, runnable via `runtests.py` / `runtests_source.py`); a version-by-version runtime compatibility matrix is not included.
 
 ## Recommended combinations
 

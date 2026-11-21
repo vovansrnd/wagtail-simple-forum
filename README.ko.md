@@ -13,7 +13,7 @@
 
 ## 요구 사항 및 호환성
 
-- 선언된 종속성: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- 선언된 종속성: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - Python, Django, Wagtail의 호환성은 함께 확인해야 합니다. 최소 종속성 버전은 모든 버전의 지원을 의미하지 않습니다.
 
 패키지 메타데이터는 Wagtail >= 6.0을 선언하지만 최소 의존성은 모든 버전의 호환성을 입증하지 않습니다. 이 아카이브에는 모든 Django/Wagtail 조합을 다루는 완전한 자동 테스트 매트릭스가 없습니다. 운영 환경을 업그레이드하기 전에 정확한 버전, 데이터베이스, 저장소 백엔드 및 배포 설정을 스테이징에서 검증하세요.
@@ -110,3 +110,6 @@ urlpatterns = [
 
 MIT. 소스 코드: [https://github.com/vovansrnd/wagtail-simple-forum](https://github.com/vovansrnd/wagtail-simple-forum).
 
+## 0.1.3 릴리스 노트
+
+- `django-js-asset<5` 필요: 버전 5.x는 임포트 가능한 모듈 이름을 변경하고 import-map js 목록을 거부하여, 신규 설치에서 django-prose-editor 0.27.x 폼의 미디어가 깨집니다.

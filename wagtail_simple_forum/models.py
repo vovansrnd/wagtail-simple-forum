@@ -84,20 +84,20 @@ class ForumAuthorDisplayMixin:
         if author.is_superuser:
             return "admin"
 
-        is_staff_mod = (
-            getattr(settings, "FORUM_STAFF_ARE_MODERATORS", True) and author.is_staff
-        )
-        has_perm_mod = author.has_perm(
-            f"{ForumTopic._meta.app_label}.change_forumtopic"
-        )
+        # Staff already qualify as moderators by the host setting. Return
+        # immediately instead of running has_perm() (which may hit the auth
+        # permission tables) and loading moderator groups for every rendered
+        # post/PM in a thread.
+        if getattr(settings, "FORUM_STAFF_ARE_MODERATORS", True) and author.is_staff:
+            return "moderator"
+
+        if author.has_perm(f"{ForumTopic._meta.app_label}.change_forumtopic"):
+            return "moderator"
 
         moderator_groups = getattr(settings, "FORUM_MODERATOR_GROUPS", None)
-        in_mod_group = bool(
-            moderator_groups
-            and any(group.name in moderator_groups for group in author.groups.all())
-        )
-
-        if is_staff_mod or has_perm_mod or in_mod_group:
+        if moderator_groups and any(
+            group.name in moderator_groups for group in author.groups.all()
+        ):
             return "moderator"
 
         return "member"
