@@ -13,7 +13,7 @@
 
 ## Requisiti e compatibilità
 
-- Dipendenze dichiarate: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- Dipendenze dichiarate: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - La compatibilità di Python, Django e Wagtail va verificata congiuntamente. La dipendenza minima del pacchetto non conferma il supporto di tutte le versioni.
 
 I metadati dichiarano Wagtail >= 6.0, ma una dipendenza minima non dimostra la compatibilità. Questo archivio non contiene una matrice automatizzata completa per tutte le combinazioni Django/Wagtail. Prima di aggiornare la produzione, verifica in staging le versioni effettive, il database, lo storage e le impostazioni di deployment.

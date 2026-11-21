@@ -2,7 +2,12 @@
 
 ## [0.1.3] — 2026-11-14
 
-- Skip redundant permission and moderator-group checks when staff users are already moderators by host configuration.
+- Skip redundant permission and moderator-group checks when staff users are
+  already moderators by host configuration, both in the author badge
+  (`author_role`) and in request-level moderator checks (`_is_moderator`).
+- Ship the plugin's functional regression test suite with the source bundle
+  (anti-spam token states, captcha, author roles, templates, HTTP-level
+  replay protection); runnable via `tests/runtests.py`.
 - Add dependency constraint `django-js-asset<5`: django-js-asset 5.x renames the
   import module and rejects import-map js lists, which breaks the media of
   django-prose-editor 0.27.x forms on fresh installs.

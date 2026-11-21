@@ -27,13 +27,15 @@ Other combinations may work but are not covered by the test suite.
 
 ## Requirements and installation
 
-Package metadata declares `wagtail>=6.0`, `django-prose-editor>=0.26`, and `nh3>=0.2.14`.
+Package metadata declares `wagtail>=6.0`, `django-prose-editor>=0.26`, `django-js-asset<5`, and `nh3>=0.2.14`.
 
 ```bash
+# Last version published on PyPI:
 pip install wagtail-simple-forum==0.1.2
 ```
 
 ```bash
+# Candidate 0.1.3 — sources of this branch, NOT yet published on PyPI:
 python -m pip install .
 ```
 
@@ -125,10 +127,10 @@ The old app must be available to Django while the importer reads it. After valid
 ## Security and operations
 
 - Run the package migrations and test posting as a guest, member, moderator, and administrator. Also verify that private-message inboxes and thread pages display paginated results, required hidden anti-spam fields are rendered, and closed topics cannot be edited/deleted by regular owners.
-- Check rate limits, moderation, private-message access, signed-token expiry/replay behavior, and email content in a staging environment. Token reuse is tracked per browser session to remain compatible with shared page caches.
+- Check rate limits, moderation, private-message access, signed-token expiry/replay behavior, and email content in a staging environment. Token reuse is detected sequentially per browser session to remain compatible with shared page caches; parallel double-submits of the same session are not atomic and are out of scope of this guarantee.
 - Do not render stored post HTML with an unconditional `|safe`; use the package rendering/sanitization path.
 - Test legacy redirects before making them permanent; permanent redirects can be cached by browsers and search engines.
-- The source bundle does not include a full automated test suite or a version-by-version runtime compatibility matrix.
+- The source bundle includes the plugin's functional regression test suite (`tests/`, runnable via `runtests.py` / `runtests_source.py`); a version-by-version runtime compatibility matrix is not included.
 
 ## Recommended combinations
 

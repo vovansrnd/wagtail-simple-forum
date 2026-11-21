@@ -13,7 +13,7 @@
 
 ## Gereksinimler ve uyumluluk
 
-- Bildirilen bağımlılıklar: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- Bildirilen bağımlılıklar: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - Python, Django ve Wagtail uyumluluğu birlikte kontrol edilmelidir. Paketin asgari bağımlılığı tüm sürümlerin desteklendiğini kanıtlamaz.
 
 Paket metaverisi Wagtail >= 6.0 belirtir; ancak asgari bağımlılık, tüm sürümlerle uyumluluğu kanıtlamaz. Bu arşiv tüm Django/Wagtail kombinasyonları için tam otomatik test matrisi içermez. Üretimi yükseltmeden önce tam sürümleri, veritabanını, depolama arka ucunu ve dağıtım ayarlarını staging ortamında sınayın.

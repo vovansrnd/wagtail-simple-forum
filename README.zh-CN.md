@@ -13,7 +13,7 @@
 
 ## 依赖与兼容性
 
-- 声明的依赖: `Wagtail >= 6.0; django-prose-editor >= 0.26; nh3 >= 0.2.14`.
+- 声明的依赖: `Wagtail >= 6.0; django-prose-editor >= 0.26; django-js-asset < 5; nh3 >= 0.2.14`.
 - Python、Django 与 Wagtail 的兼容性必须一起验证。最低依赖版本并不代表所有版本均受支持。
 
 包元数据声明 Wagtail >= 6.0，但最低依赖版本并不代表已验证所有版本的兼容性。本归档不包含覆盖所有 Django/Wagtail 组合的完整自动化测试矩阵。升级生产环境前，请在预发布环境验证具体版本、数据库、文件存储后端和部署配置。
