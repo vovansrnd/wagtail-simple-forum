@@ -38,3 +38,50 @@ class ForumAuthorRoleQueryTests(SimpleTestCase):
         )
         self.assertEqual(_DisplayObject(author).author_role, "moderator")
         author.has_perm.assert_called_once()
+
+    def test_superuser_is_admin_without_further_checks(self):
+        author = SimpleNamespace(
+            is_superuser=True,
+            is_staff=True,
+            has_perm=Mock(side_effect=AssertionError("has_perm must not run for superuser")),
+        )
+        self.assertEqual(_DisplayObject(author).author_role, "admin")
+        author.has_perm.assert_not_called()
+
+    @override_settings(FORUM_STAFF_ARE_MODERATORS=True, FORUM_MODERATOR_GROUPS=["mods"])
+    def test_moderator_group_membership_grants_role(self):
+        from types import SimpleNamespace as NS
+
+        author = NS(
+            is_superuser=False,
+            is_staff=False,
+            has_perm=Mock(return_value=False),
+            groups=NS(all=lambda: [NS(name="mods")]),
+        )
+        self.assertEqual(_DisplayObject(author).author_role, "moderator")
+
+    @override_settings(FORUM_STAFF_ARE_MODERATORS=True, FORUM_MODERATOR_GROUPS=["mods"])
+    def test_group_outside_setting_does_not_grant_role(self):
+        from types import SimpleNamespace as NS
+
+        author = NS(
+            is_superuser=False,
+            is_staff=False,
+            has_perm=Mock(return_value=False),
+            groups=NS(all=lambda: [NS(name="others")]),
+        )
+        self.assertEqual(_DisplayObject(author).author_role, "member")
+
+    def test_plain_member_is_member(self):
+        from types import SimpleNamespace as NS
+
+        author = SimpleNamespace(
+            is_superuser=False,
+            is_staff=False,
+            has_perm=Mock(return_value=False),
+            groups=NS(all=lambda: []),
+        )
+        self.assertEqual(_DisplayObject(author).author_role, "member")
+
+    def test_missing_author_is_guest(self):
+        self.assertEqual(_DisplayObject(None).author_role, "guest")

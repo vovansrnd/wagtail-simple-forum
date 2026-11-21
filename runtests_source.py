@@ -1,7 +1,10 @@
 """Д67-C: запуск тестов против ИСХОДНИКОВ ветки d67-batch-c (source tree).
 
 Отличие от runtests.py: НЕ требует wheel в site-packages — добавляет
-корень репозитория в sys.path до site-packages.
+корень репозитория в sys.path до site-packages, поэтому пакет
+импортируется из исходников. Тестовая БД создаётся DiscoverRunner'ом
+(как в обычном Django-прогоне): голый unittest.discover не делает
+setup_databases, из-за чего TestCase падали без таблиц.
 """
 import os
 import sys
@@ -13,10 +16,9 @@ import django
 
 django.setup()
 
-import unittest
+import django.conf  # noqa: E402
+from django.test.utils import get_runner  # noqa: E402
 
-loader = unittest.TestLoader()
-suite = loader.discover("tests", top_level_dir=os.path.dirname(os.path.abspath(__file__)))
-runner = unittest.TextTestRunner(verbosity=1)
-result = runner.run(suite)
-sys.exit(bool(result.failures or result.errors))
+runner = get_runner(django.conf.settings)(interactive=False, verbosity=1)
+failures = runner.run_tests(["tests"])
+sys.exit(bool(failures))
