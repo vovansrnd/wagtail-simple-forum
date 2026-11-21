@@ -1,5 +1,6 @@
 ### Пометка агента — команды (не часть stdout):
 ### Интеграция: pip install --no-cache-dir --force-reinstall --no-deps <wheel кандидата 0.1.3> в venv-wg81 стенда (было 0.1.2, после прогона восстановлено 0.1.2 — pip install --no-cache-dir --force-reinstall --no-deps wagtail-simple-forum==0.1.2, hash views.py bb077b0fa7f04160 совпадает с до-состоянием)
+# ВАЖНО: предыдущая версия этого лога была неполной (ошибка редиректа 2>&1 > file: unittest-сводка пишется в stderr и в файл не попала). Ниже — ПОЛНЫЙ повтор прогона (stdout+stderr без сокращений), тот же HEAD и тот же wheel. Прежний частичный лог заменён этим файлом целиком.
 ### Запуск: timeout 500 venv-wg81/bin/python manage.py test  (стенд /opt/MyApps/wagtail/wagtail-blogs, тестовая БД локального PostgreSQL 18.6 создаётся/удаляется раннером стенда)
 Found 160 test(s).
 System check identified no issues (0 silenced).
