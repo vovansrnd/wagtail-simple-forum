@@ -116,17 +116,21 @@ def _is_moderator(user):
     if user.is_superuser:
         return True
 
-    is_staff_mod = (
-        getattr(settings, "FORUM_STAFF_ARE_MODERATORS", True) and user.is_staff
-    )
-    has_perm_mod = user.has_perm(f"{ForumTopic._meta.app_label}.change_forumtopic")
+    # Same fast-path as ForumAuthorDisplayMixin.author_role: staff already
+    # qualify as moderators by the host setting. Return immediately instead
+    # of running has_perm() (which may hit the auth permission tables) and
+    # querying moderator groups on every request-level moderator check.
+    if getattr(settings, "FORUM_STAFF_ARE_MODERATORS", True) and user.is_staff:
+        return True
+
+    if user.has_perm(f"{ForumTopic._meta.app_label}.change_forumtopic"):
+        return True
 
     moderator_groups = getattr(settings, "FORUM_MODERATOR_GROUPS", None)
-    in_mod_group = bool(
-        moderator_groups and user.groups.filter(name__in=moderator_groups).exists()
-    )
+    if moderator_groups and user.groups.filter(name__in=moderator_groups).exists():
+        return True
 
-    return bool(is_staff_mod or has_perm_mod or in_mod_group)
+    return False
 
 
 def _require_authenticated(request):
